@@ -1,0 +1,47 @@
+<h1 class="page-header">
+  <%= t('messages.show', model: @beneficiary.model_name.human) %>
+</h1>
+
+
+
+<div class="row">
+  <div class="col-md-6">
+    
+    <div class="form-group">
+      <label>Name:</label>
+      <%= @beneficiary.name %>
+    </div>
+
+    
+    <div class="form-group">
+      <label>Email:</label>
+      <%= @beneficiary.email %>
+    </div>
+
+    
+    <div class="form-group">
+      <label>Address:</label>
+      <%= @beneficiary.address %>
+    </div>
+
+    
+    <div class="form-group">
+      <label>Phone 1:</label>
+      <%= @beneficiary.phone_1 %>
+    </div>
+
+    
+    <div class="form-group">
+      <label>Phone 2:</label>
+      <%= @beneficiary.phone_2 %>
+    </div>
+
+    <div class="form-group">
+      <%= link_to t('buttons.back'), beneficiaries_path, class:"btn btn-success" %>
+      <%= link_to t('buttons.edit'), edit_beneficiary_path(@beneficiary), class:"btn btn-primary" %>
+    </div>
+    
+  </div>
+
+
+</div>

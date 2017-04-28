@@ -1,0 +1,11 @@
+'pt-BR':
+  menu:
+    dashboard: Painel de Controle
+    checks: Cheques
+    accounts: Conta
+    beneficiaries: Beneficiários
+    holders: Perfil do titular
+    banks: Bancos
+    today: Hoje
+    logout: Sair
+    settings: Configurações

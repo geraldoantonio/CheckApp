@@ -1,0 +1,38 @@
+<h1 class="page-header">
+  <%= t('messages.show', model: @account.model_name.human) %>
+</h1>
+
+
+<div class="row">
+  <div class="col-md-6"> 
+    
+    <div class="form-group">
+      <label>Número da conta:</label>
+      <%= @account.number %>
+    </div>
+
+    
+    <div class="form-group">
+      <label>Banco:</label>
+      <%= @account.bank.bank_name %>
+    </div>
+
+    
+    <div class="form-group">
+      <label>Titular:</label>
+      <%= @account.holder.name %>
+    </div>
+
+    
+    <div class="form-group">
+      <label>Código da agência:</label>
+      <%= @account.agency_code %>
+    </div>
+
+    
+    <div class="form-group">
+      <%= link_to t('buttons.back'), accounts_path, class:"btn btn-success" %>
+      <%= link_to t('buttons.edit'), edit_account_path(@account), class:"btn btn-primary" %>
+    </div>
+  </div>
+</div>

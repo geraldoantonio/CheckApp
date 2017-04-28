@@ -1,0 +1,75 @@
+'pt-BR':
+  helpers:
+    label:
+      admin[profile_admin_attributes]:
+        name: Nome
+  activerecord:
+    models:
+      check:
+        one: Cheque
+        other: Cheques
+      holder:
+        one: Titular
+        other: Titulares
+      account:
+        one: Conta
+        other: Contas
+      beneficiary:
+        one: Beneficiário
+        other: Beneficiários
+      bank:
+        one: Banco
+        other: Bancos
+    attributes:
+      check:
+        id: Código
+        number: Cheque
+        account: Conta
+        beneficiary: Beneficiário
+        date_discount: Descontar em
+        agency_code: Agencia
+        bank: Banco
+        amount: Valor
+        created_at: Criado em
+        updated_at: Atualizado em
+      holder:
+        id: Código
+        name: Nome
+        cpf: CPF
+        cnpj: CNPJ
+        holder: Titular
+        created_at: Criado em
+        updated_at: Atualizado em
+        email: E-mail
+        password: Senha
+        confirmation_password: Confirmar Senha
+      account:
+        id: Código
+        number: Número da Conta
+        bank: Banco
+        holder: Titular
+        agency_code: Código da Agência
+        created_at: Criado em
+        updated_at: Atualizado em
+      beneficiary:
+        id: Código
+        name: Nome
+        email: E-mail
+        address: Endereço
+        phone_1: Telefone-1
+        phone_2: Telefone-2
+        created_at: Criado em
+        updated_at: Atualizado em
+      bank:
+        id: Código
+        bank_name: Nome do Banco
+        created_at: Criado em
+        updated_at: Atualizado em
+      user:
+        id: Código
+        email: E-mail
+        password: Senha
+        confirmation_password: Confirmar Senha
+
+
+

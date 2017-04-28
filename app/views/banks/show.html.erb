@@ -1,0 +1,21 @@
+<h1 class="page-header">
+  <%= t('messages.show', model: @bank.model_name.human) %>
+</h1>
+
+
+
+<div class="row">
+  <div class="col-md-6"> 
+
+    <div class="form-group">
+      <label>Nome do Banco:</label>
+      <%= @bank.bank_name %>
+    </div>
+
+    <div class="form-group">
+      <%= link_to t('buttons.back'), banks_path, class:"btn btn-success" %>
+      <%= link_to t('buttons.edit'), edit_bank_path(@bank), class:"btn btn-primary" %>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,48 @@
+<%= form_for(check) do |f| %>
+
+  <% if check.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+      <% check.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="col-md-6"> 
+
+
+      <div class="form-group">
+        <%= f.label :account %>
+        <%= f.collection_select :account_id, Account.where(:holder_id => current_user), :id, :number, {}, { class: " form-control selectpicker" ,  "data-live-search" => "true"} %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :number %>
+        <%= f.text_field :number, class: "form-control", placeholder: "Número do Cheque"  %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :amount %> (<%= currency_symbol %>)
+        <%= f.text_field :amount, class: "form-control", placeholder: "Valor do Cheque"  %>
+      </div>
+      <div class="form-group">
+        <%= f.label :date_discount %>
+        <%= f.date_field :date_discount, class: "form-control", placeholder: "Data"  %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :beneficiary %>
+        <%= f.collection_select :beneficiary_id, Beneficiary.where(:holder_id => current_user), :id, :name, {}, { class: " form-control selectpicker" ,  "data-live-search" => "true"} %>
+      </div>
+
+      <div class="form-group">
+        <%= link_to t('buttons.back'), checks_path, class:"btn btn-success" %>
+        <%= submit_tag t('buttons.save'),  class:"btn btn-primary" %>
+      </div>
+
+    </div>
+  </div>
+<% end %>

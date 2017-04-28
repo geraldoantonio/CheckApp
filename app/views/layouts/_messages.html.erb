@@ -1,0 +1,37 @@
+
+<% if notice %>
+   <%= javascript_tag "swal( 'Atenção', '#{notice}', 'success');" %>
+<% end  %>
+
+<% if alert %>
+   <%= javascript_tag "swal( 'Atenção', '#{alert}', 'error');" %>
+<% end  %>
+
+
+<%#  Erros Device %>
+<% if devise_controller? %>
+  <% unless (devise_error_messages!).blank? %>
+      <% a = "" %>
+      <% resource.errors.full_messages.each do |message|  %>
+        <% a += message + "<br>" %>
+      <% end %>      
+      <%= javascript_tag "
+        swal({
+          title: 'Atenção!',
+          text: '#{a}',
+          html: true,
+          type: 'error',
+          allowEscapeKey: true,
+          timer: 4000
+        });
+      " %>
+  <% end %>
+<% end %>
+
+<% def devise_controller %>
+    <%  ['registrations','sessions','passwords'].include? controller.controller_name %>
+<% end %>
+
+<% def erros_formulario %>
+   <%= javascript_tag "swal( 'Atenção', 'Preencha os campos em destaque corretamente!', 'error');" %>
+<% end %>

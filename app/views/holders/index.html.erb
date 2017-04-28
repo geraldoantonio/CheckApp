@@ -1,0 +1,28 @@
+
+<h1 class="page-header">
+      <%= @holder.name %>
+</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>CPF</th>
+      <th>CNPJ</th>
+      <th>E-mail</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+      <tr>
+        <td><%= @holder.id %></td>
+        <td><%= @holder.cpf %></td>
+        <td><%= @holder.cnpj %></td>
+        <td><%= @holder.user.email %></td>
+        <td>
+      <%= link_to t('buttons.edit'), edit_holder_path(@holder), class:"btn btn-primary" %></td>
+      </tr>
+  </tbody>
+</table>
+

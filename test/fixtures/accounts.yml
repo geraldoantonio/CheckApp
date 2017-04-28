@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  number: MyString
+  bank: one
+  holder: one
+  agency_code: MyString
+
+two:
+  number: MyString
+  bank: two
+  holder: two
+  agency_code: MyString

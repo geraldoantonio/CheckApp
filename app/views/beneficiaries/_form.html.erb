@@ -1,0 +1,38 @@
+<%= form_for(beneficiary) do |f| %>
+
+  <div class="row">
+    <div class="col-md-6"> 
+
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: "form-control", placeholder: "Nome" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :address %>
+      <%= f.text_field :address, class: "form-control", placeholder: "Endereço" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :phone_1 %>
+      <%= f.text_field :phone_1, class: "form-control phone", placeholder: "(99)9999.9999" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :phone_2 %>
+      <%= f.text_field :phone_2, class: "form-control phone", placeholder: "(99)9999.9999" %>
+    </div>
+    
+    <div class="form-group">
+      <%= f.label :email %>
+      <%= f.text_field :email, class: "form-control", placeholder: "Email" %>
+    </div>
+
+      <div class="form-group">
+        <%= link_to t('buttons.back'), beneficiaries_path, class:"btn btn-success" %>
+        <%= submit_tag t('buttons.save'),  class:"btn btn-primary" %>
+      </div>
+
+  </div>
+</div>
+<% end %>
