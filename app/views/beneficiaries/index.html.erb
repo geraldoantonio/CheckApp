@@ -1,49 +1,48 @@
 
-
 <h1 class="page-header">
   <%= t('messages.listing', model: @beneficiaries.model_name.human) %>
   <%= link_to t('buttons.new'), new_beneficiary_path, class:"pull-right btn btn-success" %>
 </h1>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= @beneficiaries.model.human_attribute_name('name') %></th>
-      <th><%= @beneficiaries.model.human_attribute_name('address') %></th>
-      <th><%= @beneficiaries.model.human_attribute_name('phone_1') %></th>
-      <th><%= @beneficiaries.model.human_attribute_name('phone_2') %></th>
-      <th><%= @beneficiaries.model.human_attribute_name('email') %></th>
-      <th width="100px"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @beneficiaries.each do |beneficiary| %>
-      <tr>
-        <td><%= beneficiary.name %></td>
-        <td><%= beneficiary.address %></td>
-        <td><%= beneficiary.phone_1 %></td>
-        <td><%= beneficiary.phone_2 %></td>
-        <td><%= beneficiary.email %></td>
-        <td>
-          <%= link_to edit_beneficiary_path(beneficiary), class: "btn btn-primary btn-sm" do %>          
-            <span class="glyphicon glyphicon-pencil"></span>
-          <% end -%>
-
-          <%= link_to beneficiary, method: :delete, data: { confirm: 'Você tem certeza?' }, class: "btn btn-danger btn-sm" do %>          
-            <span class="glyphicon glyphicon-trash"></span>
-          <% end -%>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
+<%= form_for_filterrific @filterrific do |f| %>
 
 
-<div class="row">
-    <div class="text-center">
-      <%= paginate @beneficiaries %>
+  <div class="well">
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.label t('labels.search') %>
+        <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
+        <%= f.text_field(
+          :search_query,
+          class: 'filterrific-periodically-observed form-control',
+          placeholder: 'Digite sua pesquisa...', autocomplete:'off'
+        ) %>
+      </div>
+
+      <div class="col-md-4">
+        <%= f.label t('labels.sorted_by') %>
+        <%= f.select(
+          :sorted_by, @filterrific.select_options[:sorted_by],
+           {}, { :class => 'form-control' }
+            ) %>
+      </div>
+
+      <div class="col-md-4">
+          <br>
+          <%= link_to(
+            t('buttons.reset_filter'),
+            reset_filterrific_url,
+            class:"btn btn-default"
+          ) %>
+      </div>
+
     </div>
-</div>
+  </div>
+
+<% end %>
+
+
+<%= render partial:'beneficiaries/list', locals: { beneficiaries: @beneficiaries } %>
+
+
+

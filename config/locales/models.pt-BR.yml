@@ -32,6 +32,10 @@
         amount: Valor
         created_at: Criado em
         updated_at: Atualizado em
+        status: Situação
+        statuses:
+          undiscounted: Não descontado
+          discounted: Descontado
       holder:
         id: Código
         name: Nome

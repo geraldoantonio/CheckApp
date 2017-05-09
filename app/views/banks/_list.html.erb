@@ -1,0 +1,32 @@
+<%# app/views/students/_list.html.erb %>
+<div id="filterrific_results">
+
+  <div class="well well-sm">
+    <div class="row">
+        <div class="text-center">
+          <%= page_entries_info banks %>
+        </div>
+    </div>
+  </div>
+
+  <table  class="table table-striped">
+    <tr>
+      <th width="120px"><%= filterrific_sorting_link(@filterrific, :id) %></th>
+      <th><%= filterrific_sorting_link(@filterrific, :banco) %></th>
+    </tr>
+    <% banks.each do |b| %>
+      <tr>
+        <td><%= b.id %></td>
+        <td><%= b.bank_name %></td>
+      </tr>
+    <% end %>
+  </table>
+
+
+  <div class="row">
+      <div class="text-center">
+        <%= paginate banks %>
+      </div>
+  </div>
+
+</div>

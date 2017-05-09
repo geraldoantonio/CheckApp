@@ -7,6 +7,8 @@ class HoldersController < ApplicationController
   def index
   end
 
+
+
   # GET /holders/1
   # GET /holders/1.json
   def show
@@ -63,11 +65,23 @@ class HoldersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_holder
-      @holder = Holder.find(current_user.id)
+      @holder = Holder.find_by(:user => current_user)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def holder_params
-      params.require(:holder).permit(:name, :cpf, :cnpj )
+
+      if password_blank?
+        params[:holder].except!([:user_attributes => [:password, :password_confirmation]])
+      end
+      
+      params.require(:holder).permit(:name, :cpf, :cnpj,
+          :user_attributes => [:email, :password, :password_confirmation])
+
+    end
+
+    def password_blank?
+      params[:holder][:user_attributes => [:password]].blank? &&
+      params[:holder][:user_attributes => [:password_confirmation]].blank?
     end
 end

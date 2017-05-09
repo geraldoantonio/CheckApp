@@ -5,36 +5,40 @@
 
 
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-12">
     
-    <div class="form-group">
-      <label>Name:</label>
-      <%= @beneficiary.name %>
-    </div>
 
-    
-    <div class="form-group">
-      <label>Email:</label>
-      <%= @beneficiary.email %>
-    </div>
-
-    
-    <div class="form-group">
-      <label>Address:</label>
-      <%= @beneficiary.address %>
-    </div>
-
-    
-    <div class="form-group">
-      <label>Phone 1:</label>
-      <%= @beneficiary.phone_1 %>
-    </div>
-
-    
-    <div class="form-group">
-      <label>Phone 2:</label>
-      <%= @beneficiary.phone_2 %>
-    </div>
+    <table class="table table-striped">
+      <tr>
+        <td><label><%= Beneficiary.human_attribute_name("name") %> </label></td>
+        <td>
+      <%= @beneficiary.name %></td>
+      </tr>
+      <tr>
+        <td>
+      <label><%= Beneficiary.human_attribute_name("address") %> </label></td>
+        <td>
+      <%= @beneficiary.address %></td>
+      </tr>
+      <tr>
+        <td>
+      <label><%= Beneficiary.human_attribute_name("phone_1") %></label></td>
+        <td>
+      <%= @beneficiary.phone_1 %></td>
+      </tr>
+      <tr>
+        <td>
+      <label><%= Beneficiary.human_attribute_name("phone_2") %></label></td>
+        <td>
+      <%= @beneficiary.phone_2 %></td>
+      </tr>
+      <tr>
+        <td>
+      <label><%= Beneficiary.human_attribute_name("email") %> </label></td>
+        <td>
+      <%= @beneficiary.email %></td>
+      </tr>
+    </table>
 
     <div class="form-group">
       <%= link_to t('buttons.back'), beneficiaries_path, class:"btn btn-success" %>

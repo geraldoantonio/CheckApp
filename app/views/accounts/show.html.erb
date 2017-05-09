@@ -4,31 +4,26 @@
 
 
 <div class="row">
-  <div class="col-md-6"> 
+  <div class="col-md-12"> 
     
-    <div class="form-group">
-      <label>Número da conta:</label>
-      <%= @account.number %>
-    </div>
-
-    
-    <div class="form-group">
-      <label>Banco:</label>
-      <%= @account.bank.bank_name %>
-    </div>
-
-    
-    <div class="form-group">
-      <label>Titular:</label>
-      <%= @account.holder.name %>
-    </div>
-
-    
-    <div class="form-group">
-      <label>Código da agência:</label>
-      <%= @account.agency_code %>
-    </div>
-
+    <table class="table table-striped">
+        <td><label><%= Bank.human_attribute_name("bank_name") %></label></td>
+        <td><%= @account.bank.bank_name %></td>
+      </tr>
+      <tr>
+        <td><label><%= Account.human_attribute_name("agency_code") %> </label></td>
+        <td><%= @account.agency_code %></td>
+      </tr>
+      <tr>
+        <td><label><%= Account.human_attribute_name("number") %> </label></td>
+        <td><%= @account.number %></td>
+      </tr>
+      <tr>
+      <tr>
+        <td><label><%= Holder.human_attribute_name("name") %> </label></td>
+        <td><%= @account.holder.name %></td>
+      </tr>
+    </table>
     
     <div class="form-group">
       <%= link_to t('buttons.back'), accounts_path, class:"btn btn-success" %>

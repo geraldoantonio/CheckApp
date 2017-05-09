@@ -1,29 +1,47 @@
 
-
 <h1 class="page-header">
   <%= t('messages.listing', model: @banks.model_name.human) %>
   <%= link_to t('buttons.new'), new_bank_path, class:"pull-right btn btn-success" %>
 </h1>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th><%= @banks.model.human_attribute_name('bank_name') %></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @banks.each do |bank| %>
-      <tr>
-        <td><%= bank.id %></td>
-        <td><%= bank.bank_name %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= form_for_filterrific @filterrific do |f| %>
 
-<div class="row">
-    <div class="text-center">
-      <%= paginate @banks %>
+
+  <div class="well">
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.label t('labels.search') %>
+        <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
+        <%= f.text_field(
+          :search_query,
+          class: 'filterrific-periodically-observed form-control',
+          placeholder: 'Nome do Banco...', autocomplete:'off'
+        ) %>
+      </div>
+
+      <div class="col-md-4">
+        <%= f.label t('labels.sorted_by') %>
+        <%= f.select(
+          :sorted_by, @filterrific.select_options[:sorted_by],
+           {}, { :class => 'form-control' }
+            ) %>
+      </div>
+      <div class="col-md-4">
+          <br>
+          <%= link_to(
+            t('buttons.reset_filter'),
+            reset_filterrific_url,
+            class:"btn btn-default"
+          ) %>
+      </div>
+
     </div>
-</div>
+  </div>
+
+      
+  <%# add an automated spinner to your form when the list is refreshed %>
+  <%#= render_filterrific_spinner %>
+<% end %>
+
+
+<%= render partial:'banks/list', locals: { banks: @banks } %>

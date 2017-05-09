@@ -113,8 +113,9 @@ namespace :dev do
           number: Random.rand(1000),
           account: account,
           amount: "#{Random.rand(2000)},#{Random.rand(999)}",
-          beneficiary: Beneficiary.all.sample,
-          date_discount: Date.today + Random.rand(90)
+          beneficiary: Beneficiary.where(:holder_id => Account.find(account).holder_id).sample,
+          date_discount: Date.today + Random.rand(90),
+          status: [0,1].sample
         )
       end
     end

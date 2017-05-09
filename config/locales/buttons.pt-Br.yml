@@ -5,10 +5,13 @@
     show: Mostrar
     edit: Editar
     destroy: Apagar
+    cancel: Cancelar
     back: Voltar
     home: Início
     close: Fechar
     send: Enviar
-    send_message: Enviar Mensagem
+    send_message: Enviar Mensagem  
+    send_mail: Enviar Email
     search: Pesquisar
-    view_details: Ver detalhes
+    view_details: Ver detalhes  
+    reset_filter: Limpar Filtros

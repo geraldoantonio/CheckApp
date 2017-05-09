@@ -1,10 +1,33 @@
 class BeneficiariesController < ApplicationController
   before_action :set_beneficiary, only: [:show, :edit, :update, :destroy]
+  before_action :beneficiary_for_checks, only: [:destroy]
 
   # GET /beneficiaries
   # GET /beneficiaries.json
   def index
-    @beneficiaries = Beneficiary.where(:holder_id => current_user).page params[:page]
+    #@beneficiaries = Beneficiary.where(:holder_id => current_user)    
+
+    @filterrific = initialize_filterrific(
+      Beneficiary.where(:holder_id => current_user),
+      params[:filterrific],
+      select_options: {
+        sorted_by: Beneficiary.options_for_sorted_by
+      }
+    ) or return
+
+    @beneficiaries = @filterrific.find.page(params[:page])
+
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+
+    rescue ActiveRecord::RecordNotFound => e
+      # There is an issue with the persisted param_set. Reset it.
+      puts "Had to reset filterrific params: #{ e.message }"
+      redirect_to(reset_filterrific_url(format: :html)) and return
+
   end
 
   # GET /beneficiaries/1
@@ -55,10 +78,15 @@ class BeneficiariesController < ApplicationController
   # DELETE /beneficiaries/1
   # DELETE /beneficiaries/1.json
   def destroy
-    @beneficiary.destroy
-    respond_to do |format|
-      format.html { redirect_to beneficiaries_path, notice: I18n.t('messages.destroyed_with', item: 'Beneficiário') }
-      format.json { head :no_content }
+    respond_to do |format|      
+      if beneficiary_for_checks
+        format.html { redirect_to beneficiaries_path, alert: I18n.t('messages.destroyed_not_with', item: 'Beneficiário') }
+        format.json { head :no_content }
+      else
+        @beneficiary.destroy
+        format.html { redirect_to beneficiaries_path, notice: I18n.t('messages.destroyed_with', item: 'Beneficiário') }
+        format.json { head :no_content }
+      end
     end
   end
 
@@ -77,6 +105,10 @@ class BeneficiariesController < ApplicationController
       params.require(:beneficiary).permit(:name, :email, :address, :phone_1, :phone_2, :holder_id)
     end
 
+    # Verify if the beneficiary is present on the check
+    def beneficiary_for_checks
+      @beneficiary.checks.length > 0
+    end
 
     def validate_beneficiary_access
       Beneficiary.where(:holder_id => current_user).where(:id => params[:id])

@@ -1,0 +1,60 @@
+<div id="filterrific_results">
+
+  <div class="well well-sm">
+    <div class="row">
+        <div class="text-center">
+          <%= page_entries_info checks %>
+        </div>
+    </div>
+  </div>
+
+  <table  class="table table-striped">
+    <tr>
+      <th width="120px"><%= filterrific_sorting_link(@filterrific, :id) %></th>
+      <th><%= filterrific_sorting_link(@filterrific, :bank) %></th>
+      <th><%= filterrific_sorting_link(@filterrific, :agency) %></th>
+      <th><%= filterrific_sorting_link(@filterrific, :account) %></th>
+      <th><%= filterrific_sorting_link(@filterrific, :number) %></th>
+      <th><%= filterrific_sorting_link(@filterrific, :amount) %></th>
+      <th><%= filterrific_sorting_link(@filterrific, :date_discount) %></th>
+      <th><%= filterrific_sorting_link(@filterrific, :status) %></th>
+      <th width="100px"></th>
+    </tr>
+    <% checks.each do |check| %>
+      <tr>        
+        <td><%= check.id %></td>
+        <td><%= check.account.bank.bank_name %></td>
+        <td><%= check.account.agency_code %></td>
+        <td><%= check.account.number %></td>
+        <td><%= check.number %></td>
+        <td><%= humanized_money_with_symbol check.amount %></td>
+        <td><%= l check.date_discount %></td>
+        <td><%= check.status_i18n %></td>
+        <td>
+          <%= link_to edit_check_path(check), class: "btn btn-primary btn-circle" do %>          
+            <span class="glyphicon glyphicon-pencil"></span>
+          <% end -%>
+
+          <%= link_to check, method: :delete, class: "btn btn-danger btn-circle", data: {confirm: 'Você tem certeza?'} do %>
+                  <i class="fa fa-remove"></i>
+          <% end %>
+
+        </td>
+      </tr>
+    <% end %>
+  </table>
+
+
+  <div class="row">
+      <div class="text-center">
+        <%= paginate checks %>
+      </div>
+  </div>
+
+</div>
+
+<%= render partial: 'holders/send_email' %>
+
+
+
+

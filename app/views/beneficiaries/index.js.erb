@@ -1,0 +1,5 @@
+<%# app/views/beneficiaries/index.js.erb %>
+<% js = escape_javascript(
+  render(partial: 'beneficiaries/list', locals: { beneficiaries: @beneficiaries })
+) %>
+$("#filterrific_results").html("<%= js %>");

@@ -4,9 +4,32 @@ class ChecksController < ApplicationController
   # GET /checks
   # GET /checks.json
   def index
-   @checks =  Check.where(:account_id => Holder.find(current_user.id).accounts).order('date_discount ASC').page params[:page]
-  
 
+    @filterrific = initialize_filterrific(
+      Check.where(:account_id => Holder.find(current_user.id).accounts),
+      params[:filterrific],
+      select_options: {
+        sorted_by: Check.options_for_sorted_by,
+        with_beneficiary_id: Beneficiary.options_for_select
+      },
+      default_filter_params: {
+        with_date_discount_gte: Date.today,
+        with_date_discount_lt: Date.today+7
+      }
+    ) or return
+
+    @checks = @filterrific.find.page(params[:page])
+
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+
+    rescue ActiveRecord::RecordNotFound => e
+      # There is an issue with the persisted param_set. Reset it.
+      puts "Had to reset filterrific params: #{ e.message }"
+      redirect_to(reset_filterrific_url(format: :html)) and return
 
   end
 
@@ -76,7 +99,7 @@ class ChecksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def check_params
-      params.require(:check).permit(:number, :account_id, :date_discount, :beneficiary_id, :amount)
+      params.require(:check).permit(:number, :account_id, :date_discount, :beneficiary_id, :amount, :status)
     end
 
 

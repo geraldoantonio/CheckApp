@@ -1,61 +1,58 @@
 
+<h1 class="page-header">
+  <%= t('messages.listing', model: @checks.model_name.human) %>
+  <%= link_to t('buttons.new'), new_check_path, class:"pull-right btn btn-success" %>
+</h1>
 
-<h1 class="page-header"><%= t('messages.listing', model: @checks.model_name.human) %>
-<%= link_to t('buttons.new'), new_check_path, class:"pull-right btn btn-success" %></h1>
-<!--
-<div class="row">
+<%= form_for_filterrific @filterrific do |f| %>
+
+
   <div class="well">
-    <div class="form-group input-group">
-        <input type="text" class="form-control" placeholder="pesquisar...">
-        <span class="input-group-btn">
-            <button class="btn btn-default" type="button"><i class="fa fa-search"></i>
-            </button>
-        </span>
+    <div class="row">
+      <div class="col-md-3">
+        <%= f.label t('labels.search') %>
+        <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
+        <%= f.text_field(
+          :search_query,
+          class: 'filterrific-periodically-observed form-control',
+          placeholder: 'Digite sua pesquisa...'
+        ) %>
+      </div>
+
+      <div class="col-md-3">
+        <%= f.label t('labels.sorted_by') %>
+        <%= f.select(
+          :sorted_by, @filterrific.select_options[:sorted_by],
+           {}, { :class => 'form-control' }
+            ) %>
+      </div>
+      <div class="col-md-2">
+        <%= f.label t('labels.date_first') %>
+        <%= f.date_field(:with_date_discount_gte, class: 'form-control ') %>
+      </div>
+
+      <div class="col-md-2">
+        <%= f.label t('labels.date_finish') %>
+        <%= f.date_field(:with_date_discount_lt, class: 'form-control') %>
+      </div>
+
+      <div class="col-md-2">
+          <br>
+          <%= link_to(
+            t('buttons.reset_filter'),
+            reset_filterrific_url,
+            class:"btn btn-default"
+          ) %>
+      </div>
     </div>
   </div>
-</div>
--->
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= @checks.model.human_attribute_name('bank') %></th>
-      <th><%= @checks.model.human_attribute_name('agency_code') %></th>
-      <th><%= @checks.model.human_attribute_name('account') %></th>
-      <th><%= @checks.model.human_attribute_name('number') %></th>
-      <th><%= @checks.model.human_attribute_name('amount') %> (<%= currency_symbol %>)</th>
-      <th><%= @checks.model.human_attribute_name('date_discount') %></th>
-      <th><%= @checks.model.human_attribute_name('beneficiary') %></th>
-      <th width="100px"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @checks.each do |check| %>
-      <tr>
-        <td><%= check.account.bank.bank_name %></td>
-        <td><%= check.account.agency_code %></td>
-        <td><%= check.account.number %></td>
-        <td><%= check.number %></td>
-        <td><%= humanized_money_with_symbol check.amount %></td>
-        <td><%= l check.date_discount %></td>
-        <td><%= check.beneficiary.name %></td>
-        <td>
-          <%= link_to edit_check_path(check), class: "btn btn-primary btn-sm" do %>          
-            <span class="glyphicon glyphicon-pencil"></span>
-          <% end -%>
-
-          <%= link_to check, method: :delete, data: { confirm: 'Você tem certeza?' }, class: "btn btn-danger btn-sm" do %>          
-            <span class="glyphicon glyphicon-trash"></span>
-          <% end -%>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% end %>
 
 
-<div class="row">
-    <div class="text-center">
-      <%= paginate @checks %>
-    </div>
-</div>
+<%= render partial:'checks/list', locals: { checks: @checks } %>
+
+
+
+
+

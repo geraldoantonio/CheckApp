@@ -5,6 +5,7 @@ class CreateChecks < ActiveRecord::Migration[5.0]
       t.references :account, foreign_key: true
       t.references :beneficiary, foreign_key: true
       t.date :date_discount
+      t.column :status, :integer, default: 0
 
       t.timestamps
     end

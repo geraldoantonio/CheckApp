@@ -6,6 +6,7 @@ Rails.application.routes.draw do
          passwords: 'users/passwords'
  }
   
+  resources :send_mail,    only:[:edit, :create]
 
   root 'home#index'
 

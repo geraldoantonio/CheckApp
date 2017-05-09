@@ -9,17 +9,24 @@ class Users::RegistrationsController < Devise::RegistrationsController
     respond_with self.resource
   end
 
+  def update
+
+  end
+
   protected
 
+
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(
-      :sign_up,
-       keys:[
+    devise_parameter_sanitizer.permit(:sign_up, keys: [
           :email, :password, :password_confirmation, 
           :holder_attributes => [:name, :cpf, :cnpj]
-       ]
-    )
+        ])
+
+    devise_parameter_sanitizer.permit(:account_update, keys: [
+          :email, :password, :password_confirmation
+        ])
   end
+
 end
 
 

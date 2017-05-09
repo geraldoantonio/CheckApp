@@ -1,0 +1,48 @@
+<div id="filterrific_results">
+
+  <div class="well well-sm">
+    <div class="row">
+        <div class="text-center">
+          <%= page_entries_info accounts %>
+        </div>
+    </div>
+  </div>
+
+  <table  class="table table-striped">
+    <tr>
+      <th width="120px"><%= filterrific_sorting_link(@filterrific, :id) %></th>
+      <th><%= filterrific_sorting_link(@filterrific, :bank) %></th>
+      <th><%= filterrific_sorting_link(@filterrific, :agency) %></th>
+      <th><%= filterrific_sorting_link(@filterrific, :account) %></th>
+      <th width="120px"></th>
+    </tr>
+    <% accounts.each do |account| %>
+      <tr>
+        <td><%= account.id %></td>
+        <td><%= account.bank.bank_name %></td>
+        <td><%= account.agency_code %></td>
+        <td><%= account.number %></td>
+        <td>
+              
+          <%= link_to edit_account_path(account), class: "btn btn-primary btn-circle" do %>
+            <span class="glyphicon glyphicon-pencil"></span>
+          <% end %>
+
+          <%= link_to account, method: :delete, data: { confirm: 'Você tem certeza?' }, class: "btn btn-danger btn-circle" do %>          
+            <span class="glyphicon glyphicon-remove"></span>
+          <% end -%>
+
+        </td>
+        
+      </tr>
+    <% end %>
+  </table>
+
+
+  <div class="row">
+      <div class="text-center">
+        <%= paginate accounts %>
+      </div>
+  </div>
+
+</div>

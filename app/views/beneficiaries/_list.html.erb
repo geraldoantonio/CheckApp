@@ -1,0 +1,58 @@
+<div id="filterrific_results">
+
+  <div class="well well-sm">
+    <div class="row">
+        <div class="text-center">
+          <%= page_entries_info beneficiaries %>
+        </div>
+    </div>
+  </div>
+
+  <table  class="table table-striped">
+    <tr>
+      <th width="120px"><%= filterrific_sorting_link(@filterrific, :id) %></th>
+      <th><%= filterrific_sorting_link(@filterrific, :name) %></th>
+      <th><%= @beneficiaries.model.human_attribute_name('address') %></th>
+      <th><%= @beneficiaries.model.human_attribute_name('phone_1') %></th>
+      <th><%= @beneficiaries.model.human_attribute_name('phone_2') %></th>
+      <th><%= @beneficiaries.model.human_attribute_name('email') %></th>
+      <th width="120px"></th>
+    </tr>
+    <% beneficiaries.each do |b| %>
+      <tr>
+        <td><%= b.id %></td>
+        <td><%= b.name %></td>
+        <td><%= b.address %></td>
+        <td><%= b.phone_1 %></td>
+        <td><%= b.phone_2 %></td>
+        <td><%= b.email %></td>
+        <td>
+          <%= link_to edit_send_mail_path(b), class: "btn btn-success btn-circle", remote: true do %>
+            <span class="glyphicon glyphicon-envelope"></span>
+          <% end %>
+
+              
+          <%= link_to edit_beneficiary_path(b), class: "btn btn-primary btn-circle" do %>
+            <span class="glyphicon glyphicon-pencil"></span>
+          <% end %>
+
+          <%= link_to b, method: :delete, data: { confirm: 'Você tem certeza?' }, class: "btn btn-danger btn-circle" do %>          
+            <span class="glyphicon glyphicon-remove"></span>
+          <% end -%>
+
+        </td>
+        
+      </tr>
+    <% end %>
+  </table>
+
+
+  <div class="row">
+      <div class="text-center">
+        <%= paginate beneficiaries %>
+      </div>
+  </div>
+
+</div>
+
+<%= render partial: 'holders/send_email' %>

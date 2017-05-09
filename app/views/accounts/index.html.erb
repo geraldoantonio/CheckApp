@@ -1,44 +1,48 @@
 
-
 <h1 class="page-header">
   <%= t('messages.listing', model: @accounts.model_name.human) %>
   <%= link_to t('buttons.new'), new_account_path, class:"pull-right btn btn-success" %>
 </h1>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= @accounts.model.human_attribute_name('bank') %></th>
-      <th><%= @accounts.model.human_attribute_name('agency_code') %></th>
-      <th><%= @accounts.model.human_attribute_name('number') %></th>
-      <th width="100px"></th>
-    </tr>
-  </thead>
+<%= form_for_filterrific @filterrific do |f| %>
 
-  <tbody>
-    <% @accounts.each do |account| %>
-      <tr>
-        <td><%= account.bank.bank_name %></td>
-        <td><%= account.agency_code %></td>
-        <td><%= account.number %></td>
-        <td>
-          <%= link_to edit_account_path(account), class: "btn btn-primary btn-sm" do %>          
-            <span class="glyphicon glyphicon-pencil"></span>
-          <% end -%>
 
-          <%= link_to account, method: :delete, data: { confirm: 'Você tem certeza?' }, class: "btn btn-danger btn-sm" do %>          
-            <span class="glyphicon glyphicon-trash"></span>
-          <% end -%>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <div class="well">
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.label t('labels.search') %>
+        <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
+        <%= f.text_field(
+          :search_query,
+          class: 'filterrific-periodically-observed form-control',
+          placeholder: 'Digite sua pesquisa...'
+        ) %>
+      </div>
 
-<br>
+      <div class="col-md-4">
+        <%= f.label t('labels.sorted_by') %>
+        <%= f.select(
+          :sorted_by, @filterrific.select_options[:sorted_by],
+           {}, { :class => 'form-control' }
+            ) %>
+      </div>
 
-<div class="row">
-    <div class="text-center">
-      <%= paginate @accounts %>
+      <div class="col-md-4">
+          <br>
+          <%= link_to(
+            t('buttons.reset_filter'),
+            reset_filterrific_url,
+            class:"btn btn-default"
+          ) %>
+      </div>
+
     </div>
-</div>
+  </div>
+
+<% end %>
+
+
+<%= render partial:'accounts/list', locals: { accounts: @accounts } %>
+
+
+

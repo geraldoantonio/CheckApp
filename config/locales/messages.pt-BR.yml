@@ -13,6 +13,7 @@
     updated_with: "%{item} foi atualizado com sucesso!"
     destroyed: Item excluído com sucesso!
     destroyed_with: "%{item} foi excluído com sucesso!"
+    destroyed_not_with: "%{item} não pode ser excluído!"
     not_authorized: Você não está autorizado a executar essa ação.
     email_delivered: Email enviado com sucesso!
     email_not_delivered: Erro ao enviar email. Tente novamente

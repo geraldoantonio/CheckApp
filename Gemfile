@@ -40,13 +40,17 @@ gem 'devise-i18n'
 gem 'rails-erd'
 #
 gem 'maskedinput-rails'
-#Filterrific is a Rails Engine plugin that makes it easy to filter, search, and sort your ActiveRecord lists.
+#Let's say you want a list of students that can be filtered by your app's users.
 gem 'filterrific'
-
-#Minimal Authorization throungh 00 design and pure Ruby classes
-gem 'pundit'
+# jQuery UI for the Rails asset pipeline
+gem 'jquery-ui-rails'
 # An awesome replacement for JavaScript's alert.
 gem 'sweetalert-rails'
+#A Really Ruby Mail Library
+gem 'mail'
+#Help ActiveRecord::Enum feature to work fine with i18n.
+gem 'enum_i18n'
+
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

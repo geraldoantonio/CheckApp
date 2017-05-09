@@ -4,7 +4,30 @@ class AccountsController < ApplicationController
   # GET /accounts
   # GET /accounts.json
   def index
-    @accounts = Account.to_user(current_user.id, params[:page])
+    #@accounts = Account.to_user(current_user.id)
+
+    @filterrific = initialize_filterrific(
+      Account.to_user(current_user.id),
+      params[:filterrific],
+      select_options: {
+        sorted_by: Account.options_for_sorted_by
+      }
+    ) or return
+
+    @accounts = @filterrific.find.page(params[:page])
+
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+
+    rescue ActiveRecord::RecordNotFound => e
+      # There is an issue with the persisted param_set. Reset it.
+      puts "Had to reset filterrific params: #{ e.message }"
+      redirect_to(reset_filterrific_url(format: :html)) and return
+
+
   end
 
   # GET /accounts/1
