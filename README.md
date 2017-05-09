@@ -1,24 +1,33 @@
-# README
+# CHECK APP
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Simples gerenciador de cheques emitidos
 
-Things you may want to cover:
+## Algumas funcionalidades:
 
-* Ruby version
+* Várias contas por usuários
+* Enviar email para Beneficiários
+* Painel de controle
+* Filtrar, pesquisar e ordenar cheques
+* Lista com 129 Bancos, permite adicionar outros.
 
-* System dependencies
+## Instruções para ambiente de desenvolvimento/testes
 
-* Configuration
+ _Execute na raiz do projeto:_
+```
+   >> rails dev:setup
+```
 
-* Database creation
+* Apaga o Banco de Dados se existir
+* Cria Banco de Dados
+* Cria Tabelas do Banco
+* Cria dados padrões
+* Cria dados aleatórios para teste
 
-* Database initialization
+## Author
+>>Geraldo Antônio dos Santos Júnior
+>email: junior.bimbo@gmail.com
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
 
-* ...
+
