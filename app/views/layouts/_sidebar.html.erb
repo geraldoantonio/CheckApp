@@ -31,14 +31,27 @@
                       <i class="fa fa-file-text-o fa-fw"></i>
                     <%= t ('menu.checks') %>
                 <% end %>
-            </li>
+            </li><!--
             <li>
                 <%= link_to banks_path do %>
                     <i class="fa fa-bank fa-fw"></i> 
                     <%= t ('menu.banks') %>
                 <% end %>
+            </li>-->
+            <li>
+                <%= link_to about_index_path do %>
+                    <i class="fa fa-info fa-fw"></i> 
+                    <%= t ('menu.about') %>
+                <% end %>
+            </li>
+
+
+            <li class="text-center">
+              <%= image_tag("logo-sistemas-informacao.jpg", height: "82") %>
+              <%= image_tag("logo-fabrica-software.png", height: "82") %>
             </li>
         </ul>
     </div>
     <!-- /.sidebar-collapse -->
+
 </div>

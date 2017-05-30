@@ -27,7 +27,7 @@
         <td><%= check.account.agency_code %></td>
         <td><%= check.account.number %></td>
         <td><%= check.number %></td>
-        <td><%= humanized_money_with_symbol check.amount %></td>
+        <td><%= check.amount.format %></td>
         <td><%= l check.date_discount %></td>
         <td><%= check.status_i18n %></td>
         <td>

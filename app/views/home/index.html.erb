@@ -9,7 +9,7 @@
                         <i class="fa fa-user fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div style="font-size: 1.5em;">R$<%=  @checks_today_sum %><br></div>
+                        <div style="font-size: 1.5em;"><%=  @checks_today_sum.format %><br></div>
                         <div><%= "#{t('menu.today')}: #{l Date.today}" %></div>
                     </div>
                 </div>
@@ -104,7 +104,7 @@
       
     <div class="panel panel-danger">
       <div class="panel-heading">
-        <i class="fa fa-warning fa-fw"></i> Cheques de hoje (<%= l Date.today %>)
+        <i class="fa fa-warning fa-fw"></i> Cheques de hoje (<%= l Date.today %>) <span class="badge pull-right"><%= @checks_today.count %></span>
       </div>
         <!-- /.panel-heading -->
       <div class="panel-body">
@@ -112,7 +112,7 @@
           <div class="list-group">
             <%= link_to c, class:"list-group-item" do %>
               <i class="fa fa-caret-right fa-fw"></i> <%= " #{c.account.bank.bank_name} |  Conta: #{c.account.number} | Cheque: #{c.number}  "%>
-              <span class="pull-right text-muted small"><em><%= humanized_money_with_symbol c.amount %></em>
+              <span class="pull-right text-muted small"><em><%= c.amount.format %></em>
               </span>
             <% end %>
           </div>
@@ -124,15 +124,15 @@
   <div class="col-md-6">
     <div class="panel panel-primary">
       <div class="panel-heading">
-          <i class="fa fa-bell fa-fw"></i> Cheques próximos para compensação
+          <i class="fa fa-bell fa-fw"></i> Cheques próximos para compensação <span class="badge pull-right"><%= @checks_week.count %></span>
       </div>
       <!-- /.panel-heading -->
       <div class="panel-body">
         <% @checks_week.each do |c| %>
           <div class="list-group">
             <%= link_to c, class:"list-group-item" do %>
-                <i class="fa fa-caret-right fa-fw"></i><%= "#{c.account.bank.bank_name} | Conta: #{c.account.number} | Cheque: #{c.number} | Data: #{ l c.date_discount } "%>
-                <span class="pull-right text-muted small"><em><%= humanized_money_with_symbol c.amount %></em>
+                <i class="fa fa-caret-right fa-fw"></i><%= c.account.bank.bank_name %><br><%= "Conta: #{c.account.number} | Cheque: #{c.number} | Data: #{ l c.date_discount } "%><br><%= " Situação: #{c.status_i18n}"%>
+                <span class="pull-right text-muted small"><em><%= c.amount.format %></em>
                 </span>
             <% end %>
           </div>
@@ -145,15 +145,15 @@
   <div class="col-md-6">
     <div class="panel panel-green">
       <div class="panel-heading">
-          <i class="fa fa-star fa-fw"></i> Cheques Acima de R$1500,00
+          <i class="fa fa-star fa-fw"></i> Cheques Acima de R$1500,00 <span class="badge pull-right"><%= @checks_amount_limit.count %></span>
       </div>
       <!-- /.panel-heading -->
       <div class="panel-body">
         <% @checks_amount_limit.each do |c| %>
           <div class="list-group">
             <%= link_to c, class:"list-group-item" do %>
-                <i class="fa fa-caret-right fa-fw"></i><%= "#{c.account.bank.bank_name} | Conta: #{c.account.number} | Cheque: #{c.number} | Data: #{ l c.date_discount } "%>
-                <span class="pull-right text-muted small"><em><%= humanized_money_with_symbol c.amount %></em>
+                <i class="fa fa-caret-right fa-fw"></i><%= c.account.bank.bank_name %><br><%= "Conta: #{c.account.number} | Cheque: #{c.number} | Data: #{ l c.date_discount } "%><br><%= " Situação: #{c.status_i18n}"%>
+                <span class="pull-right text-muted small"><em><%= c.amount.format %></em>
                 </span>
             <% end %>
           </div>
