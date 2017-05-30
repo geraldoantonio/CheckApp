@@ -24,8 +24,13 @@ Simples gerenciador de cheques emitidos
 * Cria dados aleatórios para teste
 
 ## Author
+<<<<<<< HEAD
 >> Geraldo Antônio dos Santos Júnior
 > email: junior.bimbo@gmail.com
+=======
+ - Geraldo Antônio dos Santos Júnior
+ - Email: junior.bimbo@gmail.com
+>>>>>>> 9d0f88f497d4df1ec1305f54b55c0f2e7e693747
 
 
 
