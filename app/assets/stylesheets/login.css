@@ -1,0 +1,23 @@
+
+.container {
+    background-image: url("/images/bg.jpg");
+    background-size: cover; 
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    background-attachment: fixed;
+
+}
+
+.logo-login{
+    background-color: #FFF;
+    border-radius: .4em;
+    padding: 2em;
+    margin-bottom: 5em;
+    text-align: center;
+}
+
+.logo-login img{
+  margin-left: .3em;
+}
+

@@ -9,7 +9,7 @@
 
   <div class="well">
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-6">
         <%= f.label t('labels.search') %>
         <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
         <%= f.text_field(
@@ -19,6 +19,16 @@
         ) %>
       </div>
 
+
+      <div class="col-md-3">
+        <%= f.label t('labels.status') %>
+        <%= f.select(
+          :with_status_id, @filterrific.select_options[:with_status_id],
+          { include_blank: '- Todos -' }, {:class=>"form-control"} 
+        )%>
+
+      </div>
+
       <div class="col-md-3">
         <%= f.label t('labels.sorted_by') %>
         <%= f.select(
@@ -26,12 +36,13 @@
            {}, { :class => 'form-control' }
             ) %>
       </div>
-      <div class="col-md-2">
+
+      <div class="col-md-3">
         <%= f.label t('labels.date_first') %>
         <%= f.date_field(:with_date_discount_gte, class: 'form-control ') %>
       </div>
 
-      <div class="col-md-2">
+      <div class="col-md-3">
         <%= f.label t('labels.date_finish') %>
         <%= f.date_field(:with_date_discount_lt, class: 'form-control') %>
       </div>

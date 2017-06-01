@@ -29,6 +29,14 @@
             </li>
             <li><a href="#"><i class="fa fa-gear fa-fw"></i> <%= t ('menu.settings') %></a>
             </li>
+
+            <li>
+              <%= link_to about_index_path do %>
+                  <i class="fa fa-info fa-fw"></i> <%= t ('menu.about') %>
+              <% end %>
+            </li>
+
+
             <li class="divider"></li>
             <li>
                 <%= link_to destroy_user_session_path, method: :delete do %>

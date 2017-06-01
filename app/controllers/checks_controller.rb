@@ -10,7 +10,8 @@ class ChecksController < ApplicationController
       params[:filterrific],
       select_options: {
         sorted_by: Check.options_for_sorted_by,
-        with_beneficiary_id: Beneficiary.options_for_select
+        with_beneficiary_id: Beneficiary.options_for_select,
+        with_status_id: Check.options_for_select
       },
       default_filter_params: {
         with_date_discount_gte: Date.today,

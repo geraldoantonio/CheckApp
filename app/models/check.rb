@@ -17,6 +17,8 @@ class Check < ApplicationRecord
     available_filters: [
       :sorted_by,
       :search_query,
+      :with_status_id,
+      :with_account_id,
       :with_beneficiary_id,
       :with_account_id,
       :with_date_discount_gte,
@@ -81,7 +83,10 @@ class Check < ApplicationRecord
     
   }
   scope :with_account_id, lambda { |account_ids|
-  
+    where('checks.account_id == ?', status_ids)
+  }
+  scope :with_status_id, lambda { |status_ids|
+    where('checks.status == ?', status_ids)
   }
   scope :with_date_discount_gte,lambda { |reference_time|
     where('checks.date_discount >= ?', reference_time)
@@ -90,6 +95,9 @@ class Check < ApplicationRecord
   scope :with_date_discount_lt,lambda { |reference_time|
     where('checks.date_discount <= ?', reference_time)
   }
+
+
+
   def self.options_for_sorted_by
       [
         ['Código (0-9)', 'id_asc'],
@@ -97,6 +105,10 @@ class Check < ApplicationRecord
         ['Valor (maior-menor)', 'amount_desc'],
         ['Data ', 'date_discount_asc']
       ]
+  end
+
+  def self.options_for_select
+    Check.statuses_i18n.map { |k, v| [v, Check.statuses[k] ] }
   end
 
 end
