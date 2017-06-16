@@ -1,51 +1,55 @@
 
 
 <div class="navbar-header">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-    </button>
-    <%= link_to "Check Controller App", root_path, class:"navbar-brand" %>
+  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+    <span class="sr-only">Toggle navigation</span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
+  <%= link_to "Check Controller App", root_path, class:"navbar-brand" %>
 </div>
 <!-- /.navbar-header -->
 
 
 <ul class="nav navbar-top-links navbar-right">
-    <% if user_signed_in? %>
-        <li><%= current_user.holder.name %></li>
-    <% end %>
+  <% if user_signed_in? %>
+    <li><%= current_user.holder.name %></li>
+  <% end %>
 
-    <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-        </a>
-        <ul class="dropdown-menu dropdown-user">
-            <li>
-            <%= link_to  holders_path do %>
-                <i class="fa fa-user fa-fw"></i> <%= t ('menu.holders') %>
-            <% end %>
-            </li>
-            <li><a href="#"><i class="fa fa-gear fa-fw"></i> <%= t ('menu.settings') %></a>
-            </li>
+  <li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+    </a>
+    <ul class="dropdown-menu dropdown-user">
+      <li>
+        <%= link_to  holders_path do %>
+            <i class="fa fa-user fa-fw"></i> <%= t ('menu.holders') %>
+        <% end %>
+      </li>
 
-            <li>
-              <%= link_to about_index_path do %>
-                  <i class="fa fa-info fa-fw"></i> <%= t ('menu.about') %>
-              <% end %>
-            </li>
+      <li>
+        <%= link_to edit_user_preference_path(current_user) do %>
+          <i class="fa fa-gear fa-fw"></i> <%= t ('menu.settings') %>
+        <% end %>
+      </li>
+    
+      <li>
+        <%= link_to about_index_path do %>
+            <i class="fa fa-info fa-fw"></i> <%= t ('menu.about') %>
+        <% end %>
+      </li>
 
+      <li class="divider"></li>
 
-            <li class="divider"></li>
-            <li>
-                <%= link_to destroy_user_session_path, method: :delete do %>
-                    <i class="fa fa-sign-out fa-fw"></i><%= t ('menu.logout') %>
-                <% end %>
-            </li>
-        </ul>
-        <!-- /.dropdown-user -->
-    </li>
-    <!-- /.dropdown -->
+      <li>
+          <%= link_to destroy_user_session_path, method: :delete do %>
+              <i class="fa fa-sign-out fa-fw"></i><%= t ('menu.logout') %>
+          <% end %>
+      </li>
+    </ul>
+      <!-- /.dropdown-user -->
+  </li>
+  <!-- /.dropdown -->
 </ul>
 <!-- /.navbar-top-links -->

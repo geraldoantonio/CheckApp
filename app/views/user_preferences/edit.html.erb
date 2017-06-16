@@ -1,0 +1,162 @@
+<h1 class="page-header">
+  Preferencias do Usuário
+</h1>
+
+
+<%= form_for @user_preferences do |f| %>
+
+  <% if @user_preferences.errors.any? %>
+    <div class="alert alert-danger alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+           <% @user_preferences.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end -%>
+      </ul>
+    </div>
+  <% end  %>
+
+  <div class="form-group">
+    <%= submit_tag t('buttons.save'),  class:"btn btn-primary pull-right " %>
+    <br>
+  </div>
+
+  <div>
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Informações do Sistema</a></li>
+      <li role="presentation"><a href="#rails_info" aria-controls="rails_info" role="tab" data-toggle="tab">Rails Info</a></li>
+      <li role="presentation"><a href="#email" aria-controls="email" role="tab" data-toggle="tab">Envio de Email</a></li>
+      <li role="presentation"><a href="#preferencias" aria-controls="preferencias" role="tab" data-toggle="tab">Preferencias</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="home">
+          
+        <table class="table table-striped">
+          <thead>
+              <tr>
+                <th>Configuração</th>
+                <th>Valor</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr>
+                <td><label>Protocol</label></td>
+                <td><%= request.protocol %></td>
+              </tr>
+              <tr>
+                <td><label>Host</label></td>
+                <td><%= request.host %></td>
+              </tr>
+                <td><label>Port</label></td>
+                <td><%= request.port %></td>
+              </tr>
+              <tr>
+                <td><label>IP Local</label></td>
+                <td><%= request.ip %></td>
+              </tr>
+              <tr>
+                <td><label>IP Remote</label></td>
+                <td><%= request.remote_ip %></td>
+              </tr>
+              <tr>
+                <td><label>Server Software</label></td>
+                <td><%= request.server_software %></td>
+              </tr>
+              <tr>
+                <td><label>SSL</label></td>
+                <td><%= request.ssl? %></td>
+              </tr>
+
+          </tbody>
+        </table>
+
+      </div>
+
+
+      <div role="tabpanel" class="tab-pane" id="rails_info">
+          <table class="table table-striped">
+              <tbody>                
+                <tr>
+                  <td><%= Rails::Info %></td>
+                </tr>
+              </tbody>
+          </table>
+      </div>
+
+      <div role="tabpanel" class="tab-pane" id="email">
+
+        <table class="table table-striped">
+          <tbody>
+              <tr>
+                <td><%= f.label :email_type %></td>
+                <td><%= f.select :email_type, [["SMTP","smtp"],["Send Mail","sendmail"]], {}, {:class=>"form-control"}  %></td>
+              </tr>
+
+              <tr>
+                <td><%= f.label :smtp_address %></td>
+                <td><%= f.text_field :smtp_address %></td>
+              </tr>
+              <tr>
+                <td><%= f.label :smtp_port %></td>
+                <td><%= f.text_field :smtp_port %></td>
+              </tr>
+              <tr>
+                <td><%= f.label :smtp_domain %></td>
+                <td><%= f.text_field :smtp_domain %></td>
+              </tr>
+              <tr>
+                <td><%= f.label :smtp_user %></td>
+                <td><%= f.text_field :smtp_user %></td>
+              </tr>
+              <tr>
+                <td><%= f.label :smtp_password %></td>
+                <td><%= f.text_field :smtp_password %></td>
+              </tr>
+              <tr>
+                <td><%= f.label :smtp_authentication %></td>
+                <td><%= f.select :smtp_authentication, [["Plain","plain"],["Login","login"],["Cram MD5","cram_md5"]], {}, {:class=>"form-control"}  %>
+                </td>
+              </tr>
+              <tr>
+                <td><%= f.label :smtp_enable_starttls_auto %></td>
+                <td><%= f.select :smtp_enable_starttls_auto, [["Sim","true"],["Não","false"]], {}, {:class=>"form-control"}  %>
+                </td>
+              </tr>
+
+          </tbody>
+        </table>
+
+      </div>
+
+      
+      <div role="tabpanel" class="tab-pane" id="preferencias">
+
+        <table class="table table-striped">
+          <tbody>
+              <tr>
+                <td><%= f.label :pagination_per_page %></td>
+                <td><%= f.select :pagination_per_page, [ 5, 10, 15, 20, 30 ], {}, {:class=>"form-control"}  %>
+                </td>
+              </tr>
+
+              <tr>
+                <td><%= f.label :check_value_featured %></td>
+                <td><%= f.text_field :check_value_featured %></td>
+              </tr>
+
+              <tr>
+                <td><%= f.label :check_date_near %></td>
+                <td><%= f.text_field :check_date_near  %></td>
+              </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+<% end %>

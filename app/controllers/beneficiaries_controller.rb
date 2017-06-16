@@ -15,7 +15,7 @@ class BeneficiariesController < ApplicationController
       }
     ) or return
 
-    @beneficiaries = @filterrific.find.page(params[:page])
+    @beneficiaries = @filterrific.find.page(params[:page]).per(UserPreferences.find(@current_user).pagination_per_page)
 
 
     respond_to do |format|

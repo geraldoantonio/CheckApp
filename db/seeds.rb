@@ -147,6 +147,8 @@ bar = RakeProgressbar.new(banks.length)
     Bank.find_or_create_by!(bank)
   end
 bar.finished
+
+puts ""
 ################################################################################
 
 puts "Gerando usuário padrão..."
@@ -162,6 +164,8 @@ puts "Gerando usuário padrão..."
   user.holder.name = "Fábrica de Software"
   user.holder.cpf = "999.999.999-99"
   user.holder.cnpj = "99.999.999/0001-01"
+
+  
   
   user.save!
 

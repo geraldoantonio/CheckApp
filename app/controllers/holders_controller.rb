@@ -42,6 +42,7 @@ class HoldersController < ApplicationController
   # PATCH/PUT /holders/1
   # PATCH/PUT /holders/1.json
   def update
+
     respond_to do |format|
       if @holder.update(holder_params)
         format.html { redirect_to holders_path, notice: I18n.t('messages.updated_with', item: 'Titular')}
@@ -71,17 +72,25 @@ class HoldersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def holder_params
 
+      params.require(:holder).permit(:name, :cpf, :cnpj,
+          :user_attributes => [:email, :password, :password_confirmation])
+
       if password_blank?
         params[:holder].except!([:user_attributes => [:password, :password_confirmation]])
       end
       
-      params.require(:holder).permit(:name, :cpf, :cnpj,
-          :user_attributes => [:email, :password, :password_confirmation])
+      if email_blank?
+        params[:holder].except!([:user_attributes => [:email]])
+      end
 
     end
 
     def password_blank?
-      params[:holder][:user_attributes => [:password]].blank? &&
+      params[:holder][:user_attributes => [:password]].blank? ||
       params[:holder][:user_attributes => [:password_confirmation]].blank?
+    end
+
+    def email_blank?
+      params[:holder][:user_attributes => [:email]].blank?
     end
 end

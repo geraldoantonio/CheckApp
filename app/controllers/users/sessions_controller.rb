@@ -5,9 +5,9 @@ class Users::SessionsController < Devise::SessionsController
 
   # GET /resource/sign_in
    def new
-     super do |resource|
-      resource.build_holder
-    end
+      super do |resource|
+        resource.build_holder
+      end
    end
 
   # POST /resource/sign_in

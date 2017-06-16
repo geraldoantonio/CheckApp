@@ -7,6 +7,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     build_resource({})
     resource.build_holder
     respond_with self.resource
+
   end
 
   def update
@@ -19,7 +20,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [
           :email, :password, :password_confirmation, 
-          :holder_attributes => [:name, :cpf, :cnpj]
+          :holder_attributes => [:name, :cpf, :cnpj], 
+          :user_preferences_attributes => [:user_id]
         ])
 
     devise_parameter_sanitizer.permit(:account_update, keys: [

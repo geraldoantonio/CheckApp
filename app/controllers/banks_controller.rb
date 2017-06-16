@@ -12,7 +12,7 @@ class BanksController < ApplicationController
       }
     ) or return
 
-    @banks = @filterrific.find.page(params[:page])
+    @banks = @filterrific.find.page(params[:page]).per(UserPreferences.find(@current_user).pagination_per_page)
 
 
     respond_to do |format|

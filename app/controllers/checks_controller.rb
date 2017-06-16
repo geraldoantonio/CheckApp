@@ -19,7 +19,7 @@ class ChecksController < ApplicationController
       }
     ) or return
 
-    @checks = @filterrific.find.page(params[:page])
+    @checks = @filterrific.find.page(params[:page]).per(UserPreferences.find(@current_user).pagination_per_page)
 
 
     respond_to do |format|

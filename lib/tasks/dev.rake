@@ -3,27 +3,33 @@ namespace :dev do
   task setup: :environment do
 
     puts ">>>> Executando o setup para desenvolvimento <<<<"
-
-      puts "Apagando Banco de Dados... #{%x(rake db:drop)}"
-      puts ""
-      puts "Criando Banco de Dados...  #{%x(rake db:create)}"
-      puts ""
-      puts %x(rake db:migrate)
-      puts ""
-      puts %x(rake erd)
-      puts ""
-      puts %x(rake db:seed)
-      puts ""
-      puts %x(rake dev:generate_holders)
-      puts ""
-      puts %x(rake dev:generate_beneficiaries)
-      puts ""
-      puts %x(rake dev:generate_accounts)
-      puts ""
-      puts %x(rake dev:generate_checks)
-      puts ""
+    puts ""
+    puts "Apagando Banco de Dados... #{%x(rake db:drop)}"
+    puts ""
+    puts "Criando Banco de Dados...  #{%x(rake db:create)}"
+    puts ""
+    puts %x(rake db:migrate)
+    puts ""
+    puts %x(rake erd)
+    puts ""
+    puts %x(rake db:seed)
+    puts ""
+    #puts %x(rake dev:generate_holders)
+    #puts ""
+    puts %x(rake dev:generate_user_preferences)
+    puts ""
+    puts %x(rake dev:generate_beneficiaries)
+    puts ""
+    puts %x(rake dev:generate_accounts)
+    puts ""
+    puts %x(rake dev:generate_checks)
+    puts ""
 
     puts ">>>>           Setup concluido             <<<<<"
+    puts ""
+    puts "Usuário padrão [ Login: admin@admin.com | Senha: 123456 ] "
+    puts ""
+    puts ""
 
 
   end
@@ -58,9 +64,9 @@ namespace :dev do
 
     puts "Gerando beneficiários..."
 
-    bar = RakeProgressbar.new(100)
+    bar = RakeProgressbar.new(10)
       bar.inc
-      100.times do
+      10.times do
         Beneficiary.create!(
           name: Faker::Name.name,
           address: Faker::Address.street_address,
@@ -85,7 +91,7 @@ namespace :dev do
 
     holders.each do |holder|
       bar.inc
-      ([1,1,2,3].sample).times do
+      ([1,1,2,3,4,5].sample).times do
         Account.create!(
           number: Random.rand(1000...999999),
           bank: Bank.all.sample,
@@ -108,7 +114,7 @@ namespace :dev do
 
     accounts.each do |account|
       bar.inc
-      Random.rand(20).times do
+      Random.rand(40).times do
         Check.create!(
           number: Random.rand(1000),
           account: account,
@@ -124,4 +130,36 @@ namespace :dev do
   end
 
 ################################################################################
+  desc "TODO"
+  task generate_user_preferences:  :environment do
+
+    puts "Gerando preferencias..."
+    
+    users = User.all
+    bar = RakeProgressbar.new(users.length)
+
+    users.each do |user|
+      UserPreferences.find_or_create_by!(
+        user: user,
+        pagination_per_page: [5,8,10,15,20].sample,
+        check_date_near: 6,
+      
+        email_type: "smtp",
+        smtp_address:              "smtp.gmail.com",
+        smtp_port:                 "587",
+        smtp_domain:               "localhost",
+        smtp_user:            Faker::Internet.email,
+        smtp_password:             "123456",
+        smtp_authentication:       "plain",
+        smtp_enable_starttls_auto: "true"
+      )
+    end
+
+    bar.finished
+  end
+
+  
+
+################################################################################
+
 end

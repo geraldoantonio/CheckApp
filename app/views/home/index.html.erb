@@ -145,7 +145,7 @@
   <div class="col-md-6">
     <div class="panel panel-green">
       <div class="panel-heading">
-          <i class="fa fa-star fa-fw"></i> Cheques Acima de R$1500,00 <span class="badge pull-right"><%= @checks_amount_limit.count %></span>
+          <i class="fa fa-star fa-fw"></i> Cheques Acima de <%= @preferences.check_value_featured.format %> <span class="badge pull-right"><%= @checks_amount_limit.count %></span>
       </div>
       <!-- /.panel-heading -->
       <div class="panel-body">

@@ -4,12 +4,13 @@ class Check < ApplicationRecord
 
   monetize :amount_cents
 
-
   enum status: { undiscounted: 0, discounted: 1 }
+
+
 
   # Validates
   validates :number, :account_id, :date_discount, :beneficiary_id, :status, presence: true
-  validates :amount, numericality: { greater_than: 0 }
+  validates :amount, numericality: { greater_than: 0 }  
 
 
  filterrific(

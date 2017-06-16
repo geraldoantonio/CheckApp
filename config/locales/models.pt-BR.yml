@@ -20,6 +20,9 @@
       bank:
         one: Banco
         other: Bancos
+      user_preferences:
+        one: Preferencias do Usuário
+        other: Preferencias dos Usuários
     attributes:
       check:
         id: Código
@@ -74,6 +77,19 @@
         email: E-mail
         password: Senha
         confirmation_password: Confirmar Senha
+      user_preferences:
+        email_type: Tipo de envio
+        smtp_port: Porta
+        smtp_address: Endereço
+        smtp_domain: Dominio
+        smtp_user: Usuário
+        smtp_password: Senha
+        smtp_authentication: Autenticação
+        smtp_enable_starttls_auto: Habilitar TLS 
+
+        pagination_per_page: Quantidade de itens da lista
+        check_date_near: Próximos cheques compensar (Dias)
+        check_value_featured: Destacar cheques acima de
 
 
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170509195014) do
+ActiveRecord::Schema.define(version: 20170609196014) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "number"
@@ -66,14 +66,17 @@ ActiveRecord::Schema.define(version: 20170509195014) do
 
   create_table "user_preferences", force: :cascade do |t|
     t.integer "user_id"
+    t.integer "pagination_per_page",        default: 15
+    t.integer "check_value_featured_cents", default: 150000
+    t.integer "check_date_near",            default: 6
     t.string  "email_type"
-    t.string  "address"
-    t.string  "port"
-    t.string  "domain"
-    t.string  "user_name"
-    t.string  "password"
-    t.string  "authentication"
-    t.string  "enable_starttls_auto"
+    t.string  "smtp_address"
+    t.string  "smtp_port"
+    t.string  "smtp_domain"
+    t.string  "smtp_user"
+    t.string  "smtp_password"
+    t.string  "smtp_authentication"
+    t.string  "smtp_enable_starttls_auto"
     t.index ["user_id"], name: "index_user_preferences_on_user_id"
   end
 
