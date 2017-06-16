@@ -20,8 +20,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [
           :email, :password, :password_confirmation, 
-          :holder_attributes => [:name, :cpf, :cnpj], 
-          :user_preferences_attributes => [:user_id]
+          :holder_attributes => [:name, :cpf, :cnpj]
         ])
 
     devise_parameter_sanitizer.permit(:account_update, keys: [

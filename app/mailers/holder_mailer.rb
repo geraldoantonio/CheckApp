@@ -1,5 +1,5 @@
 class HolderMailer < ApplicationMailer
-
+  
   def send_email(holder, user_preferences, beneficiary, subject, text)
     @holder = holder
     @beneficiary = beneficiary

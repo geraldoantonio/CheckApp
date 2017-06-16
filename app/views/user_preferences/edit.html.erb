@@ -1,9 +1,12 @@
+
+<%= form_for @user_preferences do |f| %>
+
 <h1 class="page-header">
   Preferencias do Usuário
+    <%= submit_tag t('buttons.save'),  class:"btn btn-primary pull-right " %>
 </h1>
 
 
-<%= form_for @user_preferences do |f| %>
 
   <% if @user_preferences.errors.any? %>
     <div class="alert alert-danger alert-dismissable">
@@ -14,11 +17,6 @@
       </ul>
     </div>
   <% end  %>
-
-  <div class="form-group">
-    <%= submit_tag t('buttons.save'),  class:"btn btn-primary pull-right " %>
-    <br>
-  </div>
 
   <div>
 

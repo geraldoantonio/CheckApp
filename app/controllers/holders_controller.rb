@@ -73,7 +73,8 @@ class HoldersController < ApplicationController
     def holder_params
 
       params.require(:holder).permit(:name, :cpf, :cnpj,
-          :user_attributes => [:email, :password, :password_confirmation])
+          :user_attributes => [:email, :password, :password_confirmation]
+      )
 
       if password_blank?
         params[:holder].except!([:user_attributes => [:password, :password_confirmation]])

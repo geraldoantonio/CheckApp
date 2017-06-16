@@ -16,10 +16,11 @@ class ChecksController < ApplicationController
       default_filter_params: {
         with_date_discount_gte: Date.today,
         with_date_discount_lt: Date.today+7
-      }
+      },
+      persistence_id: false,
     ) or return
 
-    @checks = @filterrific.find.page(params[:page]).per(UserPreferences.find(@current_user).pagination_per_page)
+    @checks = @filterrific.find.page(params[:page]).per(UserPreferences.find_by(:user_id => current_user.id).pagination_per_page)
 
 
     respond_to do |format|

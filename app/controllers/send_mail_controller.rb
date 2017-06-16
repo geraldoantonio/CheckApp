@@ -11,8 +11,8 @@ class SendMailController < ApplicationController
   def create
     @beneficiary = Beneficiary.find(params[:'recipient-id']);
     begin
-      HolderMailer.send_email(  Holder.find(current_user.id),
-                                UserPreferences.find(current_user.id), 
+      HolderMailer.send_email(  Holder.find_by(:user_id => current_user.id),
+                                UserPreferences.find_by(:user_id => current_user.id), 
                                 @beneficiary, 
                                 params[:'subject-text'],
                                 params[:'message-text']

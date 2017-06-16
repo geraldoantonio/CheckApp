@@ -3,7 +3,7 @@ class HomeController < ApplicationController
 
     @holder = Holder.find_by(:user => current_user)
 
-    @preferences = UserPreferences.find_by(:user => current_user)
+    @preferences = UserPreferences.find_or_create_by(:user => current_user)
 
     @beneficiaries = Beneficiary.where(:holder_id => @holder)
 

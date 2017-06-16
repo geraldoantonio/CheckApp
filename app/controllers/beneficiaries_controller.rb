@@ -12,10 +12,11 @@ class BeneficiariesController < ApplicationController
       params[:filterrific],
       select_options: {
         sorted_by: Beneficiary.options_for_sorted_by
-      }
+      },
+      :persistence_id => false,
     ) or return
 
-    @beneficiaries = @filterrific.find.page(params[:page]).per(UserPreferences.find(@current_user).pagination_per_page)
+    @beneficiaries = @filterrific.find.page(params[:page]).per(UserPreferences.find_by(:user_id => current_user.id).pagination_per_page)
 
 
     respond_to do |format|

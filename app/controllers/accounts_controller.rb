@@ -11,10 +11,11 @@ class AccountsController < ApplicationController
       params[:filterrific],
       select_options: {
         sorted_by: Account.options_for_sorted_by
-      }
+      },
+      :persistence_id => false,
     ) or return
 
-    @accounts = @filterrific.find.page(params[:page]).per(UserPreferences.find(@current_user).pagination_per_page)
+    @accounts = @filterrific.find.page(params[:page]).per(UserPreferences.find_by(:user_id => current_user.id).pagination_per_page)
 
 
     respond_to do |format|
