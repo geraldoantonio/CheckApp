@@ -21,4 +21,4 @@
 .byebug_history
 
 # Ignore Config
-/config/enviroments/development.rb
+config/environments/development.rb
